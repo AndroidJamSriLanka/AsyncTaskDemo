@@ -28,9 +28,10 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 Log.i("AndroidJam", "button pressed");
-                TextView output = (TextView) findViewById(R.id.content);
-                String out = Utilities.getDataFromWebsite("http://google.com/");
-                output.setText(out);
+
+                FetchDataTask fdc = new FetchDataTask();
+                fdc.execute("http://google.com");
+
 
             }
         });
@@ -65,7 +66,17 @@ public class MainActivity extends ActionBarActivity {
 
         @Override
         protected String doInBackground(String... params) {
+
+            Utilities.getDataFromWebsite(params[0]);
             return null;
+        }
+
+
+        @Override
+        protected void onPostExecute(String s) {
+            TextView output = (TextView) findViewById(R.id.content);
+            output.setText(s);
+
         }
     }
 }
