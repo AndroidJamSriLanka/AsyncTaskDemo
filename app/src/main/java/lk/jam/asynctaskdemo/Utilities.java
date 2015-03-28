@@ -18,6 +18,19 @@ import java.net.URISyntaxException;
  */
 public class Utilities {
 
+
+    private static int counter = 0;
+    public static String doSomethingHeavy(String a, String b) {
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return a + b + " "+ counter++;
+    }
+
     public static String getDataFromWebsite(String url) {
         try {
             HttpClient client = new DefaultHttpClient();

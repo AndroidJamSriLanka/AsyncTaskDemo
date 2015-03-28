@@ -1,5 +1,7 @@
 package lk.jam.asynctaskdemo;
 
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.os.AsyncTask;
 import android.os.StrictMode;
 import android.support.v7.app.ActionBarActivity;
@@ -29,8 +31,9 @@ public class MainActivity extends ActionBarActivity {
             public void onClick(View v) {
                 Log.i("AndroidJam", "button pressed");
 
-                FetchDataTask fdc = new FetchDataTask();
-                fdc.execute("http://google.com");
+                FragmentTransaction transaction = getFragmentManager().beginTransaction().add(new BlankFragment(), "EXECUTOR");
+                transaction.commit();
+
 
 
             }
@@ -62,21 +65,5 @@ public class MainActivity extends ActionBarActivity {
     }
 
 
-    private class FetchDataTask extends AsyncTask<String, Integer, String> {
 
-        @Override
-        protected String doInBackground(String... params) {
-
-            Utilities.getDataFromWebsite(params[0]);
-            return null;
-        }
-
-
-        @Override
-        protected void onPostExecute(String s) {
-            TextView output = (TextView) findViewById(R.id.content);
-            output.setText(s);
-
-        }
-    }
 }
